@@ -54,7 +54,8 @@
 
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
-};
+    EDITOR = "nvim";
+  };
 
   system.stateVersion = "23.05";
 

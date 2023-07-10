@@ -32,15 +32,21 @@
   };
 
   # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+    optimise = {
+      automatic = true;
+      dates = [ "weekly" ];
+    };
   };
 
-  # Manual optimise storage: nix-store --optimise
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-  nix.settings.auto-optimise-store = true;
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
 # Security configuration
@@ -80,8 +86,6 @@
     }))
   ];
 
-  environment.variables.EDITOR = "nvim";
-
   users = {
     users.mario = {
       isNormalUser = true;
@@ -109,8 +113,12 @@
     ];
   };
 
+  security = {
+    rtkit.enable = true;
+    polkit.enable = true;
+  };
+
   sound.enable = false; # <- Causes issues during pipewire usage
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -118,12 +126,8 @@
     pulse.enable = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   networking = {
     networkmanager.enable = true;
-#     wireless.enable = true;
     firewall.enable = true;
     firewall.allowPing = false;
   };
@@ -133,10 +137,8 @@
   # hardware.bluetooth.enable = true;
   # services.blueman.enable = true;
 
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "id_ID.UTF-8";
     LC_IDENTIFICATION = "id_ID.UTF-8";
@@ -150,22 +152,35 @@
   };
 
   programs.adb.enable = true;
-  services.udev.packages = [
-    pkgs.android-udev-rules
-  ];
 
   services = {
-    devmon.enable = true;
-    flatpak.enable = true;
-    fstrim.enable = true;
-    printing.enable = true;
-    udisks2.enable = true;
-  };
+    davfs2.enable = true;
 
-  services.power-profiles-daemon = {
-    enable = true;
+    devmon.enable = true;
+
+    flatpak.enable = true;
+
+    fstrim.enable = true;
+
+    gvfs.enable = true;
+
+    printing =  {
+      enable = true;
+      drivers = with pkgs; [
+        foo2zjs 
+      ];
+    };
+
+    udisks2.enable = true;
+
+    udev.packages = [
+      pkgs.android-udev-rules
+    ];
+
+    power-profiles-daemon = {
+      enable = true;
+    };
   };
-  security.polkit.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -181,6 +196,28 @@
       PasswordAuthentication = true;
     };
     openFirewall = true;
+  };
+
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      onShutdown = "suspend";
+      onBoot = "ignore";
+      qemu = {
+        package = pkgs.qemu_kvm;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        swtpm.enable = true;
+        runAsRoot = false;
+      };
+    };
+
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
+
+    spiceUSBRedirection.enable = true;
   };
 
   system.autoUpgrade.enable = true;
