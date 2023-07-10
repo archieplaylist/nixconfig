@@ -11,8 +11,6 @@
 
 #   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-  networking.hostName = "nixdev"; # Define your hostname.
-
   # Enable the X11 and Wayland windowing system.
   services.xserver = {
     enable = true;
