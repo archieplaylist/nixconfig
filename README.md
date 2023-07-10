@@ -34,3 +34,25 @@ nix-shell --run 'mkpasswd -m SHA-512 -s' -p mkpasswd
 ```bash
 git clone https://github.com/NvChad/NvChad --depth 1 ~/.config/nvim
 ```
+
+# Secure Boot ( Optional )
+
+## Create secureboot directory
+
+```bash
+sudo mkdir /etc/secureboot
+```
+
+## Verify files are signed for secure boot
+
+```bash
+sudo sbctl verify
+```
+
+## [](https://github.com/Spaxly/espresso#reboot-enable-secure-boot-and-boot-into-newly-installed-nixos)Reboot, enable secure boot and boot into newly installed NixOS
+
+Enroll secure boot keys
+
+```bash
+sudo sbctl enroll-keys --microsoft
+```
