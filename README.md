@@ -29,9 +29,7 @@ nix-shell --run 'mkpasswd -m SHA-512 -s' -p mkpasswd
 
 # Post Configuration
 
-### (https://github.com/Spaxly/espresso#installing-nvchad)Installing NvChad
-
-
+### [](https://github.com/Spaxly/espresso#installing-nvchad)Installing NvChad
 
 ```bash
 git clone https://github.com/NvChad/NvChad --depth 1 ~/.config/nvim
