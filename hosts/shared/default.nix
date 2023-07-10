@@ -127,6 +127,8 @@
   };
 
   networking = {
+    
+    hostName = "nixdev"; # Define your hostname.
     networkmanager.enable = true;
     firewall.enable = true;
     firewall.allowPing = false;
