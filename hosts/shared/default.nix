@@ -1,7 +1,8 @@
-{ config, pkgs, ...}:
+{ config, pkgs, lib, ...}:
 {
   boot = {
     loader = {
+      # systemd-boot.enable = lib.mkForce false;
       grub = {
         enable = true;
         useOSProber = true;
@@ -43,6 +44,10 @@
       automatic = true;
       dates = [ "weekly" ];
     };
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      warn-dirty = false
+      '';
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -95,7 +100,7 @@
     users.mario = {
       isNormalUser = true;
       initialHashedPassword = "$6$j12Xl/Yi8ZDidqoK$RLO/M7Mw21WXKF/UUHUUpO4kulNJFYJAnTbkhmG98iOWof1QNnEU5/tIGg4U93D6MwBXUFxlUxh9S6.8KYSPq1";
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" ];
+      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" "docker" ];
     };
     defaultUserShell = pkgs.zsh;
   };
@@ -213,17 +218,26 @@
   };
 
   virtualisation = {
-    libvirtd = {
+    # libvirtd = {
+    #   enable = true;
+    #   onShutdown = "suspend";
+    #   onBoot = "ignore";
+    #   qemu = {
+    #     package = [ 
+            # pkgs.qemu_kvm
+            # pkgs.virt-manager
+          # ];
+    #     ovmf.enable = true;
+    #     ovmf.packages = [ pkgs.OVMFFull.fd ];
+    #     swtpm.enable = true;
+    #     runAsRoot = false;
+    #   };
+    # };
+
+    virtualbox.host = {
+      package = pkgs.virtualbox;
       enable = true;
-      onShutdown = "suspend";
-      onBoot = "ignore";
-      qemu = {
-        package = pkgs.qemu_kvm;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-        swtpm.enable = true;
-        runAsRoot = false;
-      };
+      enableExtensionPack = true;
     };
 
     docker = {
