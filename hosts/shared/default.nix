@@ -71,6 +71,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    appimage-run
     curl
     dnsutils
     git
@@ -80,6 +81,7 @@
     pciutils
     unzip
     usbutils
+    # virtualbox
     wget
     xorg.xinput
 
@@ -100,7 +102,7 @@
     users.mario = {
       isNormalUser = true;
       initialHashedPassword = "$6$j12Xl/Yi8ZDidqoK$RLO/M7Mw21WXKF/UUHUUpO4kulNJFYJAnTbkhmG98iOWof1QNnEU5/tIGg4U93D6MwBXUFxlUxh9S6.8KYSPq1";
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" "docker" ];
+      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" "docker" "vboxusers" "kvm"];
     };
     defaultUserShell = pkgs.zsh;
   };
@@ -235,7 +237,6 @@
     # };
 
     virtualbox.host = {
-      package = pkgs.virtualbox;
       enable = true;
       enableExtensionPack = true;
     };
