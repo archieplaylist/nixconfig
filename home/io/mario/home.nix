@@ -24,7 +24,7 @@ in
   ];
 
   home = {
-    sessionVariable = {
+    sessionVariables = {
       EDITOR = "nvim";
       MOZ_ENABLE_WAYLAND = 1;
     };
