@@ -21,7 +21,7 @@
   # sudo dd if=/dev/zero of=/var/lib/swapfile bs=1M count=4k status=progress
   swapDevices = [ {
     device = "/var/lib/swapfile";
-    size = 4*1024;
+    size = 8*1024;
   } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
