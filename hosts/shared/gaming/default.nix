@@ -26,4 +26,5 @@
       # FIX required to expose LD_LIBRARY_PATH
       setLdLibraryPath = true; 
     };
+  };
 }
