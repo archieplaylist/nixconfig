@@ -23,6 +23,13 @@ in
     xdg-user-dirs
   ];
 
+  home = {
+    sessionVariable = {
+      EDITOR = "nvim";
+      MOZ_ENABLE_WAYLAND = 1;
+    };
+  };
+
   xdg = {
       enable = true;
       cacheHome = config.home.homeDirectory + "/.local/cache";
