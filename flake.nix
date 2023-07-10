@@ -41,18 +41,18 @@
             ./home/shared
 
           
-          lanzaboote.nixosModules.lanzaboote
-          ({ pkgs, lib, ... }: {
-              boot.bootspec.enable = true;
-              environment.systemPackages = [
-                pkgs.sbctl
-              ];
-              boot.loader.systemd-boot.enable = lib.mkForce false;
-              boot.lanzaboote = {
-                enable = true;
-                pkiBundle = "/etc/secureboot";
-              };
-          })
+          # lanzaboote.nixosModules.lanzaboote
+          # ({ pkgs, lib, ... }: {
+          #     boot.bootspec.enable = true;
+          #     environment.systemPackages = [
+          #       pkgs.sbctl
+          #     ];
+          #     boot.loader.systemd-boot.enable = lib.mkForce false;
+          #     boot.lanzaboote = {
+          #       enable = true;
+          #       pkiBundle = "/etc/secureboot";
+          #     };
+          # })
 
           {
             nixpkgs.overlays = [
