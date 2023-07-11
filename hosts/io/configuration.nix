@@ -41,31 +41,24 @@
   };
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-  services.gnome.games.enable = true;
+  services.gnome.games.enable = false;
 
   environment.gnome.excludePackages = (with pkgs; [
-      # gnome-photos
       gnome-tour
   ]) ++ (with pkgs.gnome; [
       cheese # webcam tool
-      gnome-music
-      # gnome-terminal
       gedit # text editor
       epiphany # web browser
       geary # email reader
-      evince # document viewer
       gnome-characters
-      totem # video player
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
-      atomix # puzzle game
   ]);
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
+    gnome.gnome-tweaks
+    gnome.dconf-editor
+    gnome.adwaita-icon-theme
     gnomeExtensions.dash-to-dock
-    # gnomeExtensions.gsconnect
-    # gnomeExtensions.mpris-indicator-button
+    gnomeExtensions.blur-my-shell
   ];
 
   programs.dconf.enable = true;
