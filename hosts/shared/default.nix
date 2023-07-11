@@ -76,12 +76,10 @@
     dnsutils
     git
     firefox
-    libsForQt5.plasma-browser-integration
     neovim-unwrapped
     pciutils
     unzip
     usbutils
-    # virtualbox
     wget
     xorg.xinput
 
