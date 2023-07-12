@@ -72,6 +72,7 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run
+    bash
     curl
     dnsutils
     git
