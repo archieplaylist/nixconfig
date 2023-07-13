@@ -83,7 +83,6 @@
     pciutils
     unzip
     usbutils
-    # virtualbox
     wget
     xorg.xinput
 
