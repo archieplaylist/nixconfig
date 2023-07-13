@@ -2,8 +2,12 @@
 
 {
   home.packages =  with unstable; [
-    vscode-fhs
     onlyoffice-bin
   ];
+
+  programs.vscode = {
+  enable = true;
+  package = unstable.vscode-fhs;
+};
 
 }
