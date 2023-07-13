@@ -9,9 +9,9 @@ in
   ];
 
   home.packages =  [
-    discord
-    youtube-music
-    betterdiscordctl
+    pkgs.discord
+    pkgs.youtube-music
+    pkgs.betterdiscordctl
     unstable.neovim-unwrapped
   ];
 
