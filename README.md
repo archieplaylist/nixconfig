@@ -19,7 +19,7 @@ cp /etc/harware-configuration.nix hosts/hardware-configuration.nix
 sudo nixos-rebuild boot --flake .#io --impure
 ```
 
-### Note :
+### Note
 
 Dont forget to change user name and hash password on `hosts/shared/default.nix`
 
@@ -33,6 +33,14 @@ nix-shell --run 'mkpasswd -m SHA-512 -s' -p mkpasswd
 
 ```bash
 git clone https://github.com/NvChad/NvChad --depth 1 ~/.config/nvim
+```
+
+### If using yuzu appimage ( optional if using KDE or QT base DE )
+
+```bash
+nix-shell -p appimage-run
+# Then, already inside of the shell
+QT_PLUGIN_PATH= appimage-run ./yuzu.appimage
 ```
 
 # Secure Boot ( Optional )
