@@ -9,17 +9,17 @@ in
   ];
 
   home.packages =  [
-    # discord
-    # youtube-music
-    # betterdiscordctl
+    discord
+    youtube-music
+    betterdiscordctl
     unstable.neovim-unwrapped
   ];
 
   xdg.desktopEntries = {
-    # discord = {
-    #   name = "Discord";
-    #   exec = "discord --enable-gpu-rasterization";
-    # };
+    discord = {
+      name = "Discord";
+      exec = "discord --enable-gpu-rasterization";
+    };
   };
 
   programs = {
