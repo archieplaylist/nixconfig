@@ -1,6 +1,8 @@
 { config, pkgs, lib, ...}:
 {
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
     loader = {
       # systemd-boot.enable = lib.mkForce false;
       grub = {
@@ -155,8 +157,8 @@
   time.timeZone = "Asia/Jakarta";
 
   # BLUETOOTH
-  # hardware.bluetooth.enable = true;
-  # services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -236,17 +238,16 @@
     #   };
     # };
 
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
+    # virtualbox.host = {
+    #   enable = true;
+    #   enableExtensionPack = true;
+    # };
 
-    docker = {
-      enable = true;
-      enableOnBoot = false;
-    };
-
-    spiceUSBRedirection.enable = true;
+    # docker = {
+    #   enable = true;
+    #   enableOnBoot = false;
+    # };
+    # spiceUSBRedirection.enable = true;
   };
 
   system.autoUpgrade.enable = true;
