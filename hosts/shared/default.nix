@@ -218,7 +218,7 @@
     openFirewall = true;
   };
 
-  virtualisation = {
+  # virtualisation = {
     # libvirtd = {
     #   enable = true;
     #   onShutdown = "suspend";
@@ -235,18 +235,17 @@
     #   };
     # };
 
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
+  #   virtualbox.host = {
+  #     enable = true;
+  #     enableExtensionPack = true;
+  #   };
 
-    docker = {
-      enable = true;
-      enableOnBoot = false;
-    };
-
-    spiceUSBRedirection.enable = true;
-  };
+  #   docker = {
+  #     enable = true;
+  #     enableOnBoot = false;
+  #   };
+  #   spiceUSBRedirection.enable = true;
+  # };
 
   system.autoUpgrade.enable = true;
 }
