@@ -129,7 +129,7 @@
     polkit.enable = true;
   };
 
-  sound.enable = false; # <- Causes issues during pipewire usage
+  # sound.enable = false; # <- Causes issues during pipewire usage
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -143,6 +143,8 @@
     #   rate = 48000;
     # };
   };
+
+  hardware.pulseaudio.enable = false;
 
   networking = {
     
@@ -218,34 +220,34 @@
     openFirewall = true;
   };
 
-  # virtualisation = {
-    # libvirtd = {
-    #   enable = true;
-    #   onShutdown = "suspend";
-    #   onBoot = "ignore";
-    #   qemu = {
-    #     package = [ 
-            # pkgs.qemu_kvm
-            # pkgs.virt-manager
-          # ];
-    #     ovmf.enable = true;
-    #     ovmf.packages = [ pkgs.OVMFFull.fd ];
-    #     swtpm.enable = true;
-    #     runAsRoot = false;
-    #   };
-    # };
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      onShutdown = "suspend";
+      onBoot = "ignore";
+      qemu = {
+        package = [ 
+            pkgs.qemu_kvm
+            pkgs.virt-manager
+          ];
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        swtpm.enable = true;
+        runAsRoot = false;
+      };
+    };
 
-  #   virtualbox.host = {
-  #     enable = true;
-  #     enableExtensionPack = true;
-  #   };
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
 
-  #   docker = {
-  #     enable = true;
-  #     enableOnBoot = false;
-  #   };
-  #   spiceUSBRedirection.enable = true;
-  # };
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
+    spiceUSBRedirection.enable = true;
+  };
 
   system.autoUpgrade.enable = true;
 }
