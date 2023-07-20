@@ -5,7 +5,7 @@ in
 {
   imports = [
     # ./browser
-    ./nvim
+    # ./nvim
   ];
 
   home.packages =  [
