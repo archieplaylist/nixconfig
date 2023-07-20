@@ -59,6 +59,10 @@
     gnome.adwaita-icon-theme
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.Vitals
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.sound-output-device-chooser
+    gnomeExtensions.appindicator
   ];
 
   programs.dconf.enable = true;
