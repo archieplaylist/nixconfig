@@ -131,7 +131,7 @@
     polkit.enable = true;
   };
 
-  sound.enable = false; # <- Causes issues during pipewire usage
+  # sound.enable = false; # <- Causes issues during pipewire usage
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -145,6 +145,8 @@
     #   rate = 48000;
     # };
   };
+
+  hardware.pulseaudio.enable = false;
 
   networking = {
     
