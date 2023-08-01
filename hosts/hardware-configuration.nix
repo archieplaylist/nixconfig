@@ -8,33 +8,47 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/69cdfd73-4f01-4fbf-96da-1d897bf28020";
+    { device = "/dev/disk/by-uuid/210b3bcc-0f21-44e9-8b32-fd2a1791ea3b";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F17C-2B88";
+    { device = "/dev/disk/by-uuid/41C0-054E";
       fsType = "vfat";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/e2f98d39-aa92-4ef2-9a6b-e8d2dc67193e"; }
-    ];
+  fileSystems."/mnt/datafile" = 
+    { device = "/dev/disk/by-uuid/738b2bd2-4f93-4275-a4c2-10b712a1e277";
+      fsType = "btrfs";
+      options = ["autodefrag" "compress=zstd:3" "space_cache=v2"];
+    };
+
+  # swapDevices = [ {
+  #   device = "/var/lib/swapfile";
+  #   size = 8*1024;
+  # } ];
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0f0u7.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s20f0u9u2.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -10,9 +10,12 @@ in
 
   home.packages =  [
     # discord
-    # youtube-music
     # betterdiscordctl
     unstable.neovim-unwrapped
+    pkgs.gittyup
+    pkgs.easyeffects
+    pkgs.filezilla
+    pkgs.firefox-bin
   ];
 
   xdg.desktopEntries = {
@@ -23,12 +26,11 @@ in
   };
 
   programs = {
-    # A terminal multiplexer
     tmux = {
       enable = true;
+      mouse = true;
     };
 
-    # a cat(1) clone with syntax highlighting and Git integration.
     bat = {
       enable = true;
       config = {
@@ -48,6 +50,14 @@ in
     skim = {
       enable = true;
       enableBashIntegration = true;
+      enableZshIntegration = true;
     };
+
+    git = {
+      enable = true;
+      # package = pkgs.git;
+      userName  = "archplaylist";
+      userEmail = "mario.tani25@gmail.com";
+  };
   };
 }

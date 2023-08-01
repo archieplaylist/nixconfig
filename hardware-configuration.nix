@@ -19,10 +19,15 @@
     };
 
   # sudo dd if=/dev/zero of=/var/lib/swapfile bs=1M count=4k status=progress
-  swapDevices = [ {
-    device = "/var/lib/swapfile";
-    size = 8*1024;
-  } ];
+  # swapDevices = [ {
+  #   device = "/var/lib/swapfile";
+  #   size = 8*1024;
+  # } ];
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

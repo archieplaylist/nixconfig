@@ -1,14 +1,51 @@
-{ inputs, pkgs, ... }: {
+{ config, pkgs, inputs, ... }:
+{
+  # imports = [
+  #   inputs.nixneovim.nixosModules.default
+  # ];
+
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
-  };
+    # colorscheme = "catppuccin-mocha";
+    # extraPlugins = with pkgs; [
+    #   vimPlugins.catppuccin-nvim
+    # ];
 
-  home.activation.installNvimConfig = ''
-    if [ ! -d "$HOME/.config/nvim/" ]; 
-    then
-      ln -s "/etc/nixos/home/shared/nvim/custom" "$HOME/.config/nvim/lua/"
-    	chmod -R +w "$HOME/.config/nvim/lua/custom"
-    fi
-  '';
+    extraLuaConfig = ''
+      	    require("catppuccin").setup({
+      		transparent_background = true,
+      	    })
+      	'';
+
+    plugins = {
+      lsp-lines.enable = true;
+      lsp-progress.enable = true;
+      lspkind.enable = true;
+      nvim-cmp.enable = true;
+      nvim-cmp.snippet.luasnip.enable = true;
+      coq-nvim = {
+        enable = true;
+        autoStart = true;
+      };
+      lualine = {
+        enable = true;
+        theme = "catppuccin";
+      };
+      lsp = {
+        enable = true;
+        coqSupport = true;
+        servers = {
+          cssls.enable = true;
+          html.enable = true;
+          pyright.enable = true;
+          rnix-lsp.enable = true;
+        };
+      };
+      treesitter = {
+        enable = true;
+        indent = true;
+      };
+    };
+  };
 }

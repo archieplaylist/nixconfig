@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }: 
 let 
-  nixpkgs-f2k = inputs.nixpkgs-f2k;
+  # nixpkgs-f2k = inputs.nixpkgs-f2k;
 in
 {
   home.username = "mario";
@@ -9,14 +9,12 @@ in
   imports = [
     ../../shared/home.nix
     ./gtk
-    ./kitty
     ./unstable.nix
   ];
 
   home.packages = with pkgs;  [
     btop
     exa
-    flameshot
     pfetch
     starship
     xdg-utils
@@ -25,9 +23,17 @@ in
 
   home = {
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "code";
       MOZ_ENABLE_WAYLAND = 1;
     };
+  };
+
+  programs.go.enable = true;
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "adwaita-dark";
   };
 
   xdg = {

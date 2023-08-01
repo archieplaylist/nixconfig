@@ -3,20 +3,12 @@
   boot = {
     loader = {
       # systemd-boot.enable = lib.mkForce false;
-      grub = {
-        enable = true;
-        useOSProber = true;
-        efiSupport = true;
-        device = "nodev";
-        # theme = pkgs.fetchFromGitHub
-        #   {
-        #     owner = "semimqmo";
-        #     repo = "sekiro_grub_theme";
-        #     rev = "1affe05f7257b72b69404cfc0a60e88aa19f54a6";
-        #     sha256 = "02gdihkd2w33qy86vs8g0pfljp919ah9c13cj4bh9fvvzm5zjfn1";
-        #   }
-        # + "/Sekiro";
-      };
+      # grub = {
+      #   enable = true;
+      #   useOSProber = true;
+      #   efiSupport = true;
+      #   device = "nodev";
+      # };
       efi = {
         canTouchEfiVariables = true;
       };
@@ -54,10 +46,16 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nix.settings = {
-    substituters = ["https://nix-gaming.cachix.org"];
-    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+    substituters = [
+      "https://nix-gaming.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
-
 
 # Security configuration
   security.sudo.enable = false;                      
@@ -73,18 +71,21 @@
   environment.systemPackages = with pkgs; [
     appimage-run
     bash
+    brave
     curl
+    ddrescue
     dnsutils
+    docker-compose
     git
-    firefox
     neovim-unwrapped
+    nodejs_20
+    nssmdns
     pciutils
+    smartmontools
     unzip
     usbutils
     wget
     xorg.xinput
-
-    # devenv.packages."${pkgs.system}".devenv
 
     # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in 
@@ -92,7 +93,7 @@
       name = "fhs";
       targetPkgs = pkgs: (base.targetPkgs pkgs) ++ [pkgs.pkg-config]; 
       profile = "export FHS=1"; 
-      runScript = "bash"; 
+      runScript = "zsh"; 
       extraOutputsToInstall = ["dev"];
     }))
   ];
@@ -135,29 +136,23 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-    # lowLatency = {
-    #   enable = true;
-    #   # defaults (no need to be set unless modified)
-    #   quantum = 64;
-    #   rate = 48000;
-    # };
   };
-
   hardware.pulseaudio.enable = false;
 
   networking = {
-    
-    hostName = "nixdev"; # Define your hostname.
+    hostName = "central8"; # Define your hostname.
     networkmanager.enable = true;
-    firewall.enable = true;
-    firewall.allowPing = false;
+    firewall = {
+      enable = true;
+      allowPing = false;
+      allowedTCPPorts = [ 80 443 3306 ];
+    };
   };
   time.timeZone = "Asia/Jakarta";
 
   # BLUETOOTH
-  # hardware.bluetooth.enable = true;
-  # services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -173,10 +168,14 @@
     LC_TIME = "id_ID.UTF-8";
   };
 
-  programs.adb.enable = true;
-
   services = {
     davfs2.enable = true;
+
+    udisks2.enable = true;
+
+    udev.packages = [
+      pkgs.android-udev-rules
+    ];
 
     devmon.enable = true;
 
@@ -189,18 +188,46 @@
     printing =  {
       enable = true;
       drivers = with pkgs; [
-        foo2zjs 
+        cups-filters
+        epson-escpr2
+        epson-201401w
+        epson_201207w
+        foomatic-db
+        foomatic-db-ppds
+        foomatic-db-ppds-withNonfreeDb
+        foo2zjs
+        gutenprint
+        gutenprintBin
       ];
     };
 
-    udisks2.enable = true;
+    system-config-printer = {
+      enable = true;
+    };
 
-    udev.packages = [
-      pkgs.android-udev-rules
-    ];
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
 
+    mysql = {
+      enable = false;
+      package = pkgs.mariadb;
+    };
+    
     power-profiles-daemon = {
       enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "no";
+        PasswordAuthentication = true;
+      };
+      openFirewall = true;
     };
   };
 
@@ -209,33 +236,28 @@
     enableSSHSupport = true;
   };
 
-# Enable the OpenSSH daemon.
-  services.openssh = {
+  programs.system-config-printer = {
     enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = true;
-    };
-    openFirewall = true;
   };
 
+  programs.adb.enable = true;
+
   virtualisation = {
-    libvirtd = {
-      enable = true;
-      onShutdown = "suspend";
-      onBoot = "ignore";
-      qemu = {
-        package = [ 
-            pkgs.qemu_kvm
-            pkgs.virt-manager
-          ];
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-        swtpm.enable = true;
-        runAsRoot = false;
-      };
-    };
+  #  libvirtd = {
+  #    enable = true;
+  #    onShutdown = "suspend";
+  #    onBoot = "ignore";
+  #    qemu = {
+  #      ovmf.enable = true;
+  #      ovmf.packages = [ pkgs.OVMFFull.fd ];
+  #      swtpm.enable = true;
+  #      runAsRoot = false;
+  #    };
+  #    package = [ 
+  #          pkgs.qemu_kvm
+  #         pkgs.virt-manager
+  #        ];
+  #  };
 
     virtualbox.host = {
       enable = true;
@@ -245,6 +267,10 @@
     docker = {
       enable = true;
       enableOnBoot = false;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
     };
     spiceUSBRedirection.enable = true;
   };
