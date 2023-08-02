@@ -13,6 +13,7 @@ in
     pkgs.gittyup
     pkgs.easyeffects
     pkgs.filezilla
+    # pkgs.firefox-bin
   ];
 
   xdg.desktopEntries = {
