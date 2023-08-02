@@ -77,7 +77,6 @@
     dnsutils
     docker-compose
     git
-    neovim-unwrapped
     nodejs_20
     nssmdns
     pciutils
@@ -140,7 +139,7 @@
   hardware.pulseaudio.enable = false;
 
   networking = {
-    hostName = "central8"; # Define your hostname.
+    hostName = "gnomepc"; # Define your hostname.
     networkmanager.enable = true;
     firewall = {
       enable = true;
@@ -189,9 +188,6 @@
       enable = true;
       drivers = with pkgs; [
         cups-filters
-        # epson-escpr2
-        # epson-201401w
-        # epson_201207w
         foomatic-db
         foomatic-db-ppds
         foomatic-db-ppds-withNonfreeDb
@@ -210,11 +206,6 @@
       nssmdns = true;
       openFirewall = true;
     };
-
-    # mysql = {
-    #   enable = false;
-    #   package = pkgs.mariadb;
-    # };
     
     power-profiles-daemon = {
       enable = true;

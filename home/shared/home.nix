@@ -11,7 +11,6 @@ in
   home.packages =  [
     pkgs.discord
     pkgs.betterdiscordctl
-    pkgs.gittyup
     pkgs.easyeffects
     pkgs.filezilla
     unstable.neovim-unwrapped
@@ -27,7 +26,7 @@ in
   programs = {
     git = {
       enable = true;
-      userName  = "archplaylist";
+      userName  = "archieplaylist";
       userEmail = "mario.tani25@gmail.com";
     };
 

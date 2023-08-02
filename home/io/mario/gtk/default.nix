@@ -20,11 +20,11 @@
       # package = pkgs.papirus-icon-theme;
     };
     gtk3.bookmarks = [ 
-      "file:///mnt/datafile"
-      "smb://192.168.1.225/master/ master on 192.168.1.225"
-      "smb://192.168.1.225/backup/ backup on 192.168.1.225"
-      "smb://file3-svr.rkzsby.local/rskdoc R"
-      "smb://file-svr.rkzsby.local/rsk_f G"
+      # "file:///mnt/datafile"
+      # "smb://192.168.1.225/master/ master on 192.168.1.225"
+      # "smb://192.168.1.225/backup/ backup on 192.168.1.225"
+      # "smb://file3-svr.rkzsby.local/rskdoc R"
+      # "smb://file-svr.rkzsby.local/rsk_f G"
       ];
     gtk3.extraConfig = {
       Settings = ''
