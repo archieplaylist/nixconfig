@@ -9,12 +9,12 @@ in
   ];
 
   home.packages =  [
-    discord
-    betterdiscordctl
-    unstable.neovim-unwrapped
+    pkgs.discord
+    pkgs.betterdiscordctl
     pkgs.gittyup
     pkgs.easyeffects
     pkgs.filezilla
+    unstable.neovim-unwrapped
   ];
 
   xdg.desktopEntries = {
@@ -30,7 +30,7 @@ in
       userName  = "archplaylist";
       userEmail = "mario.tani25@gmail.com";
     };
-    
+
     tmux = {
       enable = true;
       mouse = true;
