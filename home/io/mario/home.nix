@@ -1,7 +1,4 @@
 { config, pkgs, inputs, ... }: 
-let 
-  # nixpkgs-f2k = inputs.nixpkgs-f2k;
-in
 {
   home.username = "mario";
   home.homeDirectory = "/home/mario";

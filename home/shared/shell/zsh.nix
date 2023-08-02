@@ -7,16 +7,6 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
 
-    # historySubstringSearch.enable = true;
-    # history = {
-    #   expireDuplicatesFirst = true;
-    #   extended = true;
-    # };
-
-    # localVariables = {
-    #   GREP_COLOR = "1;33";
-    # };
-
     shellAliases = {
       ls = "exa -l -i";
       grep = "grep --color";
@@ -29,8 +19,6 @@
  # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
-    # enableZshIntegration = true;
-    # custom settings
     settings = {
       add_newline = false;
       aws.disabled = true;

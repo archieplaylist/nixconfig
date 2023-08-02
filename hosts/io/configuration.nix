@@ -88,7 +88,6 @@
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     EDITOR = "code";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 
   system.stateVersion = "23.05";

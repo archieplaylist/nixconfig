@@ -2,12 +2,10 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # wineWowPackages.stable
+    wineWowPackages.stable
     vulkan-tools
-#     lutris
-#     bottles
-#     gamemode
-    # yuzu-mainline
+    bottles
+    gamemode
   ];
 
 #   programs.steam = {
