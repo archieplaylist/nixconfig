@@ -144,7 +144,7 @@
     firewall = {
       enable = true;
       allowPing = false;
-      allowedTCPPorts = [ 80 443 3306 ];
+      # allowedTCPPorts = [ 80 443 3306 ];
     };
   };
   time.timeZone = "Asia/Jakarta";
