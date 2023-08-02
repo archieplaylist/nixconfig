@@ -34,16 +34,6 @@
       };
   };
 
-  # GPU DRIVER
-  services.xserver.videoDrivers = [ "intel" ];
-  services.xserver.deviceSection = 
-    ''
-      Option "DRI" "2"
-      Option "TearFree" "True"
-    '';
-
-
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.gnome.games.enable = false;
   services.gnome.gnome-keyring ={
     enable = true;
@@ -80,6 +70,17 @@
 
   programs.dconf.enable = true;
 
+  # GPU DRIVER
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = 
+    ''
+      Option "DRI" "2"
+      Option "TearFree" "True"
+    '';
+
+
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gnome ];
@@ -88,7 +89,6 @@
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     EDITOR = "code";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 
   system.stateVersion = "23.05";

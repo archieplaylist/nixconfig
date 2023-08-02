@@ -4,28 +4,33 @@ let
 in
 {
   imports = [
-    # ./browser
+    ./browser
     # ./nvim
   ];
 
   home.packages =  [
-    # discord
-    # betterdiscordctl
+    discord
+    betterdiscordctl
     unstable.neovim-unwrapped
     pkgs.gittyup
     pkgs.easyeffects
     pkgs.filezilla
-    pkgs.firefox-bin
   ];
 
   xdg.desktopEntries = {
-    # discord = {
-    #   name = "Discord";
-    #   exec = "discord --enable-gpu-rasterization";
-    # };
+    discord = {
+      name = "Discord";
+      exec = "discord --enable-gpu-rasterization";
+    };
   };
 
   programs = {
+    git = {
+      enable = true;
+      userName  = "archplaylist";
+      userEmail = "mario.tani25@gmail.com";
+    };
+    
     tmux = {
       enable = true;
       mouse = true;
@@ -52,12 +57,5 @@ in
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
-
-    git = {
-      enable = true;
-      # package = pkgs.git;
-      userName  = "archplaylist";
-      userEmail = "mario.tani25@gmail.com";
-  };
   };
 }

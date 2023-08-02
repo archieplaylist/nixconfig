@@ -2,13 +2,13 @@
 {
   boot = {
     loader = {
-      # systemd-boot.enable = lib.mkForce false;
-      # grub = {
-      #   enable = true;
-      #   useOSProber = true;
-      #   efiSupport = true;
-      #   device = "nodev";
-      # };
+      systemd-boot.enable = lib.mkForce false;
+      grub = {
+        enable = true;
+        useOSProber = true;
+        efiSupport = true;
+        device = "nodev";
+      };
       efi = {
         canTouchEfiVariables = true;
       };
@@ -189,9 +189,9 @@
       enable = true;
       drivers = with pkgs; [
         cups-filters
-        epson-escpr2
-        epson-201401w
-        epson_201207w
+        # epson-escpr2
+        # epson-201401w
+        # epson_201207w
         foomatic-db
         foomatic-db-ppds
         foomatic-db-ppds-withNonfreeDb
@@ -211,10 +211,10 @@
       openFirewall = true;
     };
 
-    mysql = {
-      enable = false;
-      package = pkgs.mariadb;
-    };
+    # mysql = {
+    #   enable = false;
+    #   package = pkgs.mariadb;
+    # };
     
     power-profiles-daemon = {
       enable = true;
@@ -231,49 +231,33 @@
     };
   };
 
+  programs.system-config-printer = {
+    enable = true;
+  };
+
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-  programs.system-config-printer = {
-    enable = true;
-  };
-
   programs.adb.enable = true;
 
-  virtualisation = {
-  #  libvirtd = {
-  #    enable = true;
-  #    onShutdown = "suspend";
-  #    onBoot = "ignore";
-  #    qemu = {
-  #      ovmf.enable = true;
-  #      ovmf.packages = [ pkgs.OVMFFull.fd ];
-  #      swtpm.enable = true;
-  #      runAsRoot = false;
-  #    };
-  #    package = [ 
-  #          pkgs.qemu_kvm
-  #         pkgs.virt-manager
-  #        ];
-  #  };
+  # virtualisation = {
+  #   virtualbox.host = {
+  #     enable = true;
+  #     enableExtensionPack = true;
+  #   };
 
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
-
-    docker = {
-      enable = true;
-      enableOnBoot = false;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
+  #   docker = {
+  #     enable = true;
+  #     enableOnBoot = false;
+  #     autoPrune = {
+  #       enable = true;
+  #       dates = "weekly";
+  #     };
+  #   };
+  #   spiceUSBRedirection.enable = true;
+  # };
 
   system.autoUpgrade.enable = true;
 }

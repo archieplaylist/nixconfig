@@ -10,12 +10,12 @@
       url = "github:40huo/Patched-Fonts";
       flake = false;
     };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, lanzaboote, nix-gaming, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-gaming, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = inputs.nixpkgs.legacyPackages.${system};
@@ -37,18 +37,18 @@
             ./home/shared
 
           
-          lanzaboote.nixosModules.lanzaboote
-          ({ pkgs, lib, ... }: {
-              boot.bootspec.enable = true;
-              environment.systemPackages = [
-                pkgs.sbctl
-              ];
-              boot.loader.systemd-boot.enable = lib.mkForce false;
-              boot.lanzaboote = {
-                enable = true;
-                pkiBundle = "/etc/secureboot";
-              };
-          })
+          # lanzaboote.nixosModules.lanzaboote
+          # ({ pkgs, lib, ... }: {
+          #     boot.bootspec.enable = true;
+          #     environment.systemPackages = [
+          #       pkgs.sbctl
+          #     ];
+          #     boot.loader.systemd-boot.enable = lib.mkForce false;
+          #     boot.lanzaboote = {
+          #       enable = true;
+          #       pkiBundle = "/etc/secureboot";
+          #     };
+          # })
 
           {
             nixpkgs.overlays = [

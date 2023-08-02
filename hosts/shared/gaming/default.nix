@@ -2,17 +2,17 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # wineWowPackages.stable
+    wineWowPackages.stable
     vulkan-tools
-#     lutris
-#     bottles
-#     gamemode
+    lutris
+    bottles
+    gamemode
     # yuzu-mainline
   ];
 
-#   programs.steam = {
-#     enable = true;
-#   };
+  programs.steam = {
+    enable = true;
+  };
 
   hardware = {
     opengl = {
