@@ -9,6 +9,7 @@
     onlyoffice-bin
     postman
     remmina
+    transmission
     vscode-fhs
     wpsoffice
   ];
