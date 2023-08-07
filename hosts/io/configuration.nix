@@ -3,7 +3,6 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
       ../hardware-configuration.nix
       ../shared
       ../shared/fhs-fonts.nix
@@ -21,13 +20,6 @@
       touchpad.tapping = true;
     };
 
-    # GPU DRIVER
-#     videoDrivers = [ "amdgpu-pro" ];
-#     deviceSection = ''
-#       Option "DRI" "2"
-#       Option "TearFree" "True"
-#       '';
-#
     # DESKTOP ENVIRONTMENT
     displayManager = {
       sddm = {
@@ -52,7 +44,7 @@
 
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
-    EDITOR = "nvim";
+    EDITOR = "code";
   };
 
   system.stateVersion = "23.05";

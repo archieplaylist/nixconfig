@@ -9,7 +9,6 @@ in
   imports = [
     ../../shared/home.nix
     ./gtk
-    ./kitty
     ./unstable.nix
   ];
 
@@ -25,7 +24,7 @@ in
 
   home = {
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "code";
       MOZ_ENABLE_WAYLAND = 1;
     };
   };

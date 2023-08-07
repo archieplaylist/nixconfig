@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 {
   gtk = {
     enable = true;
@@ -12,16 +12,16 @@
       };
     };
     cursorTheme = {
-      name = "Volantes Light Cursors";
-      package = pkgs.volantes-cursors;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Adwaita";
+      # package = pkgs.papirus-icon-theme;
     };
   };
 
-  # home.sessionVariables = {
-  #   GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
-  # };
+  home.sessionVariables = {
+    GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
+  };
 }

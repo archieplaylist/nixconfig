@@ -23,6 +23,12 @@ in
   };
 
   programs = {
+    git = {
+      enable = true;
+      userName  = "archieplaylist";
+      userEmail = "mario.tani25@gmail.com";
+    };
+    
     # A terminal multiplexer
     # tmux = {
     #   enable = true;

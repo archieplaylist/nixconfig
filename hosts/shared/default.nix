@@ -4,20 +4,12 @@
     kernelPackages = pkgs.linuxPackages_latest;
     # kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
     loader = {
-      # systemd-boot.enable = lib.mkForce false;
+      systemd-boot.enable = lib.mkForce false;
       grub = {
         enable = true;
         useOSProber = true;
         efiSupport = true;
         device = "nodev";
-        # theme = pkgs.fetchFromGitHub
-        #   {
-        #     owner = "semimqmo";
-        #     repo = "sekiro_grub_theme";
-        #     rev = "1affe05f7257b72b69404cfc0a60e88aa19f54a6";
-        #     sha256 = "02gdihkd2w33qy86vs8g0pfljp919ah9c13cj4bh9fvvzm5zjfn1";
-        #   }
-        # + "/Sekiro";
       };
       efi = {
         canTouchEfiVariables = true;
@@ -56,10 +48,16 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nix.settings = {
-    substituters = ["https://nix-gaming.cachix.org"];
-    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+    substituters = [
+      "https://nix-gaming.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
-
 
 # Security configuration
   security.sudo.enable = false;                      
@@ -79,8 +77,8 @@
     git
     firefox
     libsForQt5.plasma-browser-integration
-    neovim-unwrapped
     pciutils
+    smartmontools
     unzip
     usbutils
     wget
@@ -145,15 +143,15 @@
     #   rate = 48000;
     # };
   };
-
   hardware.pulseaudio.enable = false;
 
   networking = {
-    
-    hostName = "nixdev"; # Define your hostname.
+    hostName = "nixmain"; # Define your hostname.
     networkmanager.enable = true;
     firewall.enable = true;
     firewall.allowPing = false;
+    # allowedTCPPorts = [ 80 443 3306 ];
+
   };
   time.timeZone = "Asia/Jakarta";
 
@@ -191,7 +189,13 @@
     printing =  {
       enable = true;
       drivers = with pkgs; [
-        foo2zjs 
+        cups-filters
+        foomatic-db
+        foomatic-db-ppds
+        foomatic-db-ppds-withNonfreeDb
+        foo2zjs
+        gutenprint
+        gutenprintBin
       ];
     };
 
@@ -201,25 +205,38 @@
       pkgs.android-udev-rules
     ];
 
+    system-config-printer = {
+      enable = true;
+    };
+
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
+
     power-profiles-daemon = {
       enable = true;
     };
+
+    openssh = {
+      enable = true;
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "no";
+        PasswordAuthentication = true;
+      };
+      openFirewall = true;
+    };
+  };
+
+  programs.system-config-printer = {
+    enable = true;
   };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-  };
-
-# Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = true;
-    };
-    openFirewall = true;
   };
 
   virtualisation = {

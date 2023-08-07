@@ -4,26 +4,25 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     home-manager.url = "github:nix-community/home-manager";
     nix-gaming.url = "github:fufexan/nix-gaming";
     patched-fonts = {
       url = "github:40huo/Patched-Fonts";
       flake = false;
     };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # use devenv to manage my development environment
     # devenv.url = "github:cachix/devenv/v0.6.2";
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixpkgs-f2k, lanzaboote, nix-gaming, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-gaming, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = inputs.nixpkgs.legacyPackages.${system};
         unstable = import nixpkgs-unstable {
-          inherit system;
+          # inherit system;
           config.allowUnfree = true;
         };
       config.allowUnfree = true;
@@ -40,7 +39,6 @@
 	          ./hosts/shared/blocker
             ./home/shared
 
-          
           # lanzaboote.nixosModules.lanzaboote
           # ({ pkgs, lib, ... }: {
           #     boot.bootspec.enable = true;
@@ -56,10 +54,6 @@
 
           {
             nixpkgs.overlays = [
-              # nixpkgs-f2k.overlays.compositors
-              # nixpkgs-f2k.overlays.window-managers
-              nixpkgs-f2k.overlays.stdenvs
-
               (final: _:
                 let
                   inherit (final) system;
