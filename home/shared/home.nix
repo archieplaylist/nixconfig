@@ -30,10 +30,10 @@ in
       userEmail = "mario.tani25@gmail.com";
     };
 
-    tmux = {
-      enable = true;
-      mouse = true;
-    };
+    # tmux = {
+    #   enable = true;
+    #   mouse = true;
+    # };
 
     bat = {
       enable = true;
