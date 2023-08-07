@@ -5,7 +5,6 @@
     libreoffice-fresh
     onlyoffice-bin
     vscode-fhs
-    wpsoffice
   ];
 
 }

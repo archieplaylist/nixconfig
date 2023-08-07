@@ -7,4 +7,4 @@ mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak
 
 cp /etc/nixos/harware-configuration.nix hosts/hardware-configuration.nix
 
-sudo nixos-rebuild boot --flake .#io --impure
+# sudo nixos-rebuild boot --flake .#io --impure

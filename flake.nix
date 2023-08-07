@@ -27,10 +27,10 @@
     in
     {
       nixosConfigurations = {
-        io = inputs.nixpkgs.lib.nixosSystem {
+        gnome = inputs.nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs;};
           modules = [
-            ./hosts/io/configuration.nix
+            ./hosts/gnome/configuration.nix
             ./hosts/shared
             ./hosts/shared/gaming
 	          ./hosts/shared/blocker
@@ -70,7 +70,7 @@
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; inherit unstable; };
-                users.mario = ./home/io/mario/home.nix;
+                users.mario = ./home/gnome/mario/home.nix;
               };
             }
           ];
