@@ -25,7 +25,13 @@
     };
   };
 
-  programs.go.enable = true;
+  programs = { 
+    go.enable = true;
+    obs-studio = { 
+      enable = true;
+      package = pkgs.obs-studio;
+    };
+  };
 
   qt = {
     enable = true;
@@ -34,15 +40,15 @@
   };
 
   xdg = {
-      enable = true;
-      cacheHome = config.home.homeDirectory + "/.local/cache";
+    enable = true;
+    cacheHome = config.home.homeDirectory + "/.local/cache";
     userDirs = {
         enable = true;
         createDirectories = true;
         extraConfig = {
           XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
         };
-      };
+    };
   };
 
   home.stateVersion = "23.05";

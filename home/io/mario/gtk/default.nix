@@ -53,6 +53,7 @@
         "clipboard-indicator@tudmotu.com"
         "dash-to-dock@micxgx.gmail.com"
         "appindicatorsupport@rgcjonas.gmail.com"
+        "gTile@vibou"
       ];
     };
     "org/gnome/shell/extensions/user-theme" = {

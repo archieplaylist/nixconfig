@@ -76,12 +76,14 @@
     gnomeExtensions.appindicator
     gnomeExtensions.coverflow-alt-tab
     gnomeExtensions.gsconnect
+    gnomeExtensions.gtile
   ];
 
   programs.dconf.enable = true;
 
   xdg.portal = {
     enable = true;
+    # gtkUsePortal = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gnome ];
   };
 
