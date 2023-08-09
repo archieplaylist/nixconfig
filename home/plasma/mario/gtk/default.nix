@@ -15,10 +15,10 @@
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
     };
-    iconTheme = {
+    # iconTheme = {
       # name = "Adwaita";
       # package = pkgs.papirus-icon-theme;
-    };
+    # };
     gtk3.bookmarks = [
       ];
     gtk3.extraConfig = {

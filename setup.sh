@@ -2,11 +2,11 @@
 
 set -e
 
-cp /etc/nixos/harware-configuration.nix hosts/hardware-configuration.nix
+cp /etc/nixos/hardware-configuration.nix hosts/hardware-configuration.nix
 
-mv /etc/nixos/harware-configuration.nix /etc/nixos/harware-configuration.nix.bak
-mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak
+sudo mv /etc/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix.bak
+sudo mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak
 
 
-sudo nix flake update .
+sudo nix flake update . --extra-experimental-feature nix-command flake
 # sudo nixos-rebuild boot --flake .#io --impure
