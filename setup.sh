@@ -8,5 +8,5 @@ sudo mv /etc/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.
 sudo mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak
 
 
-sudo nix flake update . --extra-experimental-feature nix-command flake
+# sudo nix flake update . --extra-experimental-feature nix-command flake
 # sudo nixos-rebuild boot --flake .#io --impure
