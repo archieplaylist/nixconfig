@@ -8,9 +8,9 @@
     gamemode
   ];
 
-#   programs.steam = {
-#     enable = true;
-#   };
+  programs.steam = {
+    enable = true;
+  };
 
   hardware = {
     opengl = {
