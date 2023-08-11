@@ -84,6 +84,8 @@
     smartmontools
     unzip
     usbutils
+    qemu_kvm
+    virt-manager
     wget
     xorg.xinput
 
@@ -102,7 +104,7 @@
     users.mario = {
       isNormalUser = true;
       initialHashedPassword = "$6$j12Xl/Yi8ZDidqoK$RLO/M7Mw21WXKF/UUHUUpO4kulNJFYJAnTbkhmG98iOWof1QNnEU5/tIGg4U93D6MwBXUFxlUxh9S6.8KYSPq1";
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" "docker" "vboxusers" "kvm"];
+      extraGroups = [ "wheel" "networkmanager" "adbusers" "audio" "video" "docker" "vboxusers" "kvm" "libvirtd" "qemu-libvirtd"];
     };
     defaultUserShell = pkgs.zsh;
   };
@@ -142,12 +144,29 @@
   networking = {
     hostName = "central8"; # Define your hostname.
     networkmanager.enable = true;
+    # useDHCP = false;
     firewall = {
       enable = true;
       allowPing = false;
       allowedTCPPorts = [ 80 443 3306 8090 5000 ];
     };
+
+    interfaces = {
+      # enp0s20f0u9u2.useDHCP = true;
+      br0.useDHCP = true;
+      # br0.ipv4.addresses = [ {
+      #   address = "172.20.200.234";
+      #   prefixLength = 24;
+      # }];
+    };
+
+    bridges = {
+      "br0" = {
+        interfaces = [ "enp0s20f0u9u2" ];
+      };
+    };
   };
+
   time.timeZone = "Asia/Jakarta";
 
   # BLUETOOTH
@@ -243,21 +262,17 @@
   programs.adb.enable = true;
 
   virtualisation = {
-  #  libvirtd = {
-  #    enable = true;
-  #    onShutdown = "suspend";
-  #    onBoot = "ignore";
-  #    qemu = {
-  #      ovmf.enable = true;
-  #      ovmf.packages = [ pkgs.OVMFFull.fd ];
-  #      swtpm.enable = true;
-  #      runAsRoot = false;
-  #    };
-  #    package = [ 
-  #          pkgs.qemu_kvm
-  #         pkgs.virt-manager
-  #        ];
-  #  };
+   libvirtd = {
+     enable = true;
+     onShutdown = "suspend";
+     onBoot = "ignore";
+     qemu = {
+       ovmf.enable = true;
+       ovmf.packages = [ pkgs.OVMFFull.fd ];
+       swtpm.enable = true;
+       runAsRoot = false;
+     };
+   };
 
     virtualbox.host = {
       enable = true;

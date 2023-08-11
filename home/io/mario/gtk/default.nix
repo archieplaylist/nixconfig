@@ -38,10 +38,16 @@
     };
   };
   dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       # gtk-theme = "Catppuccin-Mocha-Standard-Blue-Dark";
     };
+
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
@@ -56,6 +62,7 @@
         "gTile@vibou"
       ];
     };
+    
     "org/gnome/shell/extensions/user-theme" = {
       name = "Catppuccin-Mocha-Standard-Blue-Dark";
     };
