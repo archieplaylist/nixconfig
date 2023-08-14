@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./browser
-    # ./nvim
   ];
 
   home.packages =  [
@@ -13,7 +12,6 @@ in
     pkgs.gittyup
     pkgs.easyeffects
     pkgs.filezilla
-    # pkgs.firefox-bin
   ];
 
   xdg.desktopEntries = {
