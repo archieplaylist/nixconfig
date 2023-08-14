@@ -6,10 +6,12 @@
     dbeaver
     libreoffice-fresh
     mission-center
+    mpv
     onlyoffice-bin
     postman
     remmina
     transmission
+    vlc
     vscode-fhs
     wpsoffice
   ];

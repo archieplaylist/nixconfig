@@ -74,6 +74,7 @@
     brave
     curl
     ddrescue
+    distrobox
     dnsutils
     docker-compose
     git
